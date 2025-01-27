@@ -529,7 +529,7 @@ with tab1:
 
                     with st.expander("マーケットプレイスで役立ちそうなデータ上位10件"):
                         results = get_cosine_similarity()
-                        st.dataframe(results)
+                        st.dataframe(results, use_container_width=True)
 
 with tab2:
     st.markdown("### キーワードからデータを探す")
