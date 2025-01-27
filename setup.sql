@@ -48,13 +48,13 @@ DROP TABLE IF EXISTS temp_embedding_listings;
 -- Create API Integration for Git
 CREATE OR REPLACE API INTEGRATION git_api_integration_itagaki
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/ta-taiyo')
+  API_ALLOWED_PREFIXES = ('https://github.com/sf-yitagaki')
   ENABLED = TRUE;
 
 -- Create Git Repository
 CREATE OR REPLACE GIT REPOSITORY DATA_CATALOG.TABLE_CATALOG.git_data_crawler_itagaki
   API_INTEGRATION = git_api_integration_itagaki
-  ORIGIN = 'https://github.com/ta-taiyo/data_catalog_app.git';
+  ORIGIN = 'https://github.com/sf-yitagaki/data-catalog-app.git';
 
 ALTER GIT REPOSITORY DATA_CATALOG.TABLE_CATALOG.git_data_crawler_itagaki FETCH;
 
