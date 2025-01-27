@@ -87,8 +87,7 @@ def get_all_usage_stats():
         st.error(f"利用統計の取得中にエラーが発生しました: {str(e)}")
         return pd.DataFrame()
 
-# テーブルカタログを取得する関数（キャッシュ付き）
-@st.cache_data()
+# テーブルカタログを取得する関数
 def get_table_catalog(databasename):
     try:
         df = session.sql(f"""
@@ -591,8 +590,6 @@ with tab2:
                         ]['access_count'].sum()
                         st.metric("過去30日間のアクセス数", table_access)
                     
-                    if st.button("詳細を見る", key=f"search_{full_table_name}"):
-                        st.session_state.selected_table = full_table_name
         else:
             st.info("条件に一致するテーブルが見つかりませんでした。")
         
