@@ -14,6 +14,8 @@ CREATE OR REPLACE TABLE DATA_CATALOG.TABLE_CATALOG.TABLE_CATALOG (
 
 /*** マーケットプレイスデータ一覧のEmbeddingを作成 ***/
  -- Step 0: マーケットプレイスで受領したデータ一覧の確認
+USE SCHEMA DATA_CATALOG.TABLE_CATALOG;
+
 show available listings in data exchange snowflake_data_marketplace;
 
 -- Step 1: 一時テーブルを作成して中間データを保存
@@ -21,7 +23,7 @@ CREATE OR REPLACE TEMPORARY TABLE temp_embedding_listings AS
 WITH available_listings AS (
     SELECT * 
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
-    -- WHERE "is_share_imported" = true -- 自社で取得したデータのみである場合
+    -- WHERE "is_share_imported" = true 自社で取得したデータのみである場合
 )
 SELECT 
     PARSE_JSON("metadata"):title::STRING AS title,
@@ -36,7 +38,7 @@ SELECT
     SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', description) AS embeddings
 FROM temp_embedding_listings;
 
--- SELECT * FROM marketplace_embedding_listings LIMIT 10;
+SELECT * FROM data_catalog.table_catalog.marketplace_embedding_listings LIMIT 10;
 
 -- オプション: 一時テーブルを削除
 DROP TABLE IF EXISTS temp_embedding_listings;

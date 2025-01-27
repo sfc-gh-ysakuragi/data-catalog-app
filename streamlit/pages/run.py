@@ -167,7 +167,7 @@ if submit_button:
         model_available = test_complete(session, model)
         if model_available:
             status.update(
-            label="モデルが利用可能です", state="complete", expanded=False
+            label="OK", state="complete", expanded=False
         )
         else:
             status.update(

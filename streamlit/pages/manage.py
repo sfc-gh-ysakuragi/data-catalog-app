@@ -29,7 +29,7 @@ def filter_embeddings(question):
                 CREATED_ON, 
                 EMBEDDINGS, 
                 VECTOR_COSINE_SIMILARITY(TABLE_CATALOG.EMBEDDINGS,
-                    SNOWFLAKE.CORTEX.EMBED_TEXT_1024('voyage-multilingual-2', ?)
+                    SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', ?)
                 ) AS similarity
             FROM TABLE_CATALOG
             ORDER BY similarity DESC
