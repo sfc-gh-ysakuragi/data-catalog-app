@@ -167,7 +167,7 @@ if submit_button:
         model_available = test_complete(session, model)
         if model_available:
             status.update(
-            label="OK", state="complete", expanded=False
+            label="OK", state="complete", expanded=True
         )
         else:
             status.update(
