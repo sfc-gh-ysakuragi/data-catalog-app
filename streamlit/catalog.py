@@ -279,7 +279,7 @@ def display_usage_analytics(usage_stats, table_name=None):
         usage_stats = usage_stats[usage_stats['table_full_name'] == table_name]
 
     # 利用統計の可視化
-    st.subheader("📊 利用統計分析")
+    st.subheader(f"{database_name} の利用統計分析")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -303,7 +303,7 @@ def display_usage_analytics(usage_stats, table_name=None):
         st.plotly_chart(fig_hourly, use_container_width=True)
 
     # 利用パターンの分析
-    st.subheader("📊 利用パターンの分析")
+    st.subheader("利用パターンの分析")
     col3, col4 = st.columns(2)
     
     with col3:
