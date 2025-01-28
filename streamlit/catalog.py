@@ -332,7 +332,7 @@ def display_usage_analytics(usage_stats, table_name=None):
             else:
                 st.warning(f"📉 直近1週間のアクセス数が平均より{abs(trend_diff):.1f}%減少しています")
 
-# 新しい関数: データ探索のための質問とカテゴリを生成
+# データ探索のための質問とカテゴリを生成
 @st.cache_data
 def generate_discovery_questions():
     return [
@@ -348,7 +348,7 @@ def generate_discovery_questions():
 
 
 
-# 新しい関数: キーワードに基づいてテーブルをフィルタリング
+# キーワードに基づいてテーブルをフィルタリング
 def filter_tables_by_keywords(table_catalog, keywords):
     filtered_tables = []
     for _, row in table_catalog.iterrows():
@@ -360,7 +360,7 @@ def filter_tables_by_keywords(table_catalog, keywords):
     
     return pd.DataFrame(filtered_tables)
 
-# 新しい関数: 人気のテーブルを取得
+# 人気のテーブルを取得
 def get_popular_tables(usage_stats, table_catalog, limit=5):
     if usage_stats.empty:
         return pd.DataFrame()
@@ -370,7 +370,7 @@ def get_popular_tables(usage_stats, table_catalog, limit=5):
                               .head(limit)
     return popular_tables
 
-# 新しい関数: おすすめのテーブルを表示
+# おすすめのテーブルを表示
 def display_recommended_tables(table_catalog, usage_stats):
     if table_catalog.empty or usage_stats.empty:
         st.info("テーブルの利用統計情報がありません")
@@ -486,7 +486,7 @@ with tab1:
                                     display: inline-block;
                                     border: 1px solid #e0e4eb;
                                 '>
-                                    <span style='font-size: 0.9em; color: #666;'>👥 過去30日間のアクセス数:</span>
+                                    <span style='font-size: 0.9em; color: #666;'>👥 過去3ヶ月のアクセス数:</span>
                                     <span style='font-size: 1.1em; font-weight: bold; margin-left: 8px; color: #2c3e50;'>{table_access}</span>
                                 </div>
                                 """,
@@ -588,7 +588,7 @@ with tab2:
                         table_access = usage_stats[
                             usage_stats['table_full_name'] == full_table_name
                         ]['access_count'].sum()
-                        st.metric("過去30日間のアクセス数", table_access)
+                        st.metric("👥 過去3ヶ月のアクセス数", table_access)
                     
         else:
             st.info("条件に一致するテーブルが見つかりませんでした。")
