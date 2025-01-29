@@ -2,7 +2,7 @@
 ここに掲載されているサンプルコードは参照目的でのみ提供し、このコードはいかなる保証も伴わないことにご注意ください。
 サンプルコードの使用に関するサポートは提供しません。
 
-Copyright (c) 2024 Snowflake Inc. All Rights Reserved.
+Copyright (c) 2025 Snowflake Inc. All Rights Reserved.
 
 ## 目的
 データカタログアプリはSnowflakeに溜めたデータを幅広く活用していくために作っています。このアプリは大きく3つの機能がありメタデータ生成機能(run.py)、管理機能(manage.py)、カタログ機能(catalog.py)から成ります。
