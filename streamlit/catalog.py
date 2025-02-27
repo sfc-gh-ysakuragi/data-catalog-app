@@ -346,8 +346,6 @@ def generate_discovery_questions():
         {"category": "組織", "question": "組織・部門別のデータ", "keywords": ["department", "division", "organization", "部門", "組織", "部署"]},
     ]
 
-
-
 # キーワードに基づいてテーブルをフィルタリング
 def filter_tables_by_keywords(table_catalog, keywords):
     filtered_tables = []
