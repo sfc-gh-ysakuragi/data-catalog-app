@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS temp_embedding_listings;
 -- Create API Integration for Git
 CREATE OR REPLACE API INTEGRATION git_api_integration_itagaki
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/sf-yitagaki')
+  API_ALLOWED_PREFIXES = ('https://github.com/sfc-gh-ysakuragi')
   ENABLED = TRUE;
 
 -- Create Git Repository
@@ -96,7 +96,7 @@ CREATE OR REPLACE PROCEDURE DATA_CATALOG.TABLE_CATALOG.CATALOG_TABLE(
                                                           prompt string,
                                                           sampling_mode string DEFAULT 'fast', 
                                                           n integer DEFAULT 5,
-                                                          model string DEFAULT 'claude-3-5-sonnet',
+                                                          model string DEFAULT 'mistral-large2',
                                                           update_comment boolean Default TRUE)
 RETURNS VARIANT
 LANGUAGE PYTHON
