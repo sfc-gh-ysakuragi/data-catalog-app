@@ -21,15 +21,16 @@ show available listings in data exchange snowflake_data_marketplace;
 -- Step 1: 一時テーブルを作成して中間データを保存
 CREATE OR REPLACE TEMPORARY TABLE temp_embedding_listings AS
 WITH available_listings AS (
-    SELECT * 
+    SELECT *
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
     -- WHERE "is_share_imported" = true 自社で取得したデータのみである場合
 )
-SELECT 
-    PARSE_JSON("metadata"):title::STRING AS title,
-    PARSE_JSON("metadata"):description::STRING AS description
+SELECT
+    REGEXP_SUBSTR("metadata", '"title":"([^"]+)"', 1, 1, 'e', 1) AS title,
+    REGEXP_SUBSTR("metadata", '"description":"([^"]*)"', 1, 1, 'e', 1) AS description
 FROM available_listings;
 
+SELECT * FROM temp_embedding_listings LIMIT 10;
 -- Step 2: 最終テーブルを作成し、埋め込みを生成
 CREATE OR REPLACE TABLE marketplace_embedding_listings AS
 SELECT 
@@ -54,7 +55,7 @@ CREATE OR REPLACE API INTEGRATION git_api_integration_itagaki
 -- Create Git Repository
 CREATE OR REPLACE GIT REPOSITORY DATA_CATALOG.TABLE_CATALOG.git_data_crawler_itagaki
   API_INTEGRATION = git_api_integration_itagaki
-  ORIGIN = 'https://github.com/sf-yitagaki/data-catalog-app.git';
+  ORIGIN = 'https://github.com/sfc-gh-ysakuragi/data-catalog-app.git';
 
 ALTER GIT REPOSITORY DATA_CATALOG.TABLE_CATALOG.git_data_crawler_itagaki FETCH;
 
@@ -117,7 +118,7 @@ CREATE OR REPLACE PROCEDURE DATA_CATALOG.TABLE_CATALOG.DATA_CATALOG(target_datab
                                                          sampling_mode string DEFAULT 'fast', 
                                                          update_comment boolean Default TRUE,
                                                          n integer DEFAULT 5,
-                                                         model string DEFAULT 'claude-3-5-sonnet'
+                                                         model string DEFAULT 'mistral-large2'
                                                          )
 RETURNS TABLE()
 LANGUAGE PYTHON
@@ -134,7 +135,7 @@ EXECUTE AS CALLER;
 CREATE OR REPLACE STREAMLIT DATA_CATALOG.TABLE_CATALOG.DATA_CATALOG_APP
 ROOT_LOCATION = '@data_catalog.table_catalog.src_files'
 MAIN_FILE = '/catalog.py'
-QUERY_WAREHOUSE = 'demo_wh';
+QUERY_WAREHOUSE = 'SAKURAGI_WH';
 
 -- 2025_01バンドル以降はDDLが変更になるので注意
 -- CREATE OR REPLACE STREAMLIT DATA_CATALOG.TABLE_CATALOG.DATA_CATALOG_APP
