@@ -16,7 +16,7 @@ session = get_active_session()
 
 with st.sidebar:
     lang_model = st.radio("使用したい言語モデルを選んでください",
-            ("mistral-large2", "mixtral-8x7b", "mistral-7b","reka-flash","llama3.1-8b","llama3.1-70b","jamba-instruct","jamba-1.5-mini"))
+            ("claude-4-opus","claude-4-sonnet","claude-3-7-sonnet","claude-3-5-sonnet","deepseek-r1","gemma-7b","jamba-1.5-mini","jamba-1.5-large","jamba-instruct","llama2-70b-chat","llama3-8b","llama3-70b","llama3.1-8b","llama3.1-70b","llama3.1-405b","llama3.2-1b","llama3.2-3b","llama3.3-70b","llama4-maverick","llama4-scout","mistral-large","mistral-large2","mistral-7b","mixtral-8x7b","openai-gpt-4.1","openai-o4-mini","reka-core","reka-flash","snowflake-arctic","snowflake-llama-3.1-405b","snowflake-llama-3.3-70b"))
 
 
 # データベース一覧を取得する関数（キャッシュ付き）
